@@ -12,13 +12,11 @@ alias none="git reset && git status"
 alias contrebase='git rebase --continue'
 alias abortrebase='git rebase --abort'
 alias skiprebase='git rebase --skip'
-alias contmerge='git merge --continue'
 alias abortmerge='git merge --abort'
-alias skipmerge='git merge --skip'
 
 # management
 alias ggpushforce='git push origin $(current_branch) --force-with-lease'
-alias ggpullrebase='git pull --rebase origin $(current_branch)'
+alias ggpullrebase='git pull --rebase --autostash origin $(current_branch)'
 alias amendcommit='git commit --amend --no-edit'
 alias fetch='echo "Fetching branches..."; git fetch --quiet && echo "Done!"'
 
