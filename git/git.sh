@@ -30,15 +30,73 @@ tcommit() {
 }
 
 ggpullremote() {
-  if [ "$#" == "1" ]
+  if [ -z $1 ]
   then
-    echo "Pulling remote branch \"$@\"..."
-    git fetch --quiet
-    git branch --track "$@" "origin/$@"
-    git checkout "$@"
-    git pull --rebase --autostash origin "$@"
-    echo 'Done!'
-  else
-    echo 'Please pass branch name.'
+    echo 'Please pass branch name (example: "ggpullremote feature-branch")'
+    return
   fi
+
+  echo "Pulling remote branch \"$@\"..."
+  git fetch --quiet
+  git branch --track "$@" "origin/$@"
+  git checkout "$@"
+  git pull --rebase --autostash origin "$@"
+  echo 'Done!'
+}
+
+ggrebase() {
+  if [ -z $1 ]
+  then
+    echo 'Please pass branch name (example: "ggrebase master")'
+    return
+  fi
+
+  base_branch=$@
+  feature_branch=$(git_current_branch)
+
+  # checkout and pull base branch
+  echo "Pulling remote branch \"$base_branch\"..."
+  git checkout "$base_branch" --quiet
+  git pull --quiet --rebase --autostash origin "$base_branch"
+  git checkout "$feature_branch" --quiet
+
+  # checkout and rebase feature branch
+  echo "Rebasing onto \"$base_branch\"..."
+  git rebase "$base_branch" >/dev/null
+  n_conflicts=$(git diff --name-only --diff-filter=U | wc -l | tr -d '[:space:]')
+
+  # handle conflicts
+  if [ "$n_conflicts" == "0" ]
+  then
+    echo 'Successfully rebased.'
+  else
+    echo "$n_conflicts conflicted files found."
+  fi
+}
+
+ggresolve() {
+  text_editor=$P_EDITOR_NAME
+  n_conflicts=$(git diff --name-only --diff-filter=U | wc -l | tr -d '[:space:]')
+
+  if [ "$n_conflicts" == "0" ]
+  then
+    echo 'No conflicts found.'
+    return
+  fi
+
+  if [ ! -z $1 ]
+  then
+    text_editor=$1
+  fi
+
+  if [ -z $text_editor ]
+  then
+    echo 'Please pass text editor name (example: "ggresolve vim")'
+    echo 'TIP: Editor name defaults to `P_EDITOR_NAME` variable.'
+    return
+  fi
+
+  git diff --name-only --diff-filter=U | while read file
+    do eval "$text_editor $file"
+  done
 }

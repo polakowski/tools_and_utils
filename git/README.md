@@ -1,11 +1,19 @@
 ## Git
 Aliases and functions to speed up your git workflow.
 
+### Requirements
+- git 2.6 or newer
+
 ### Installation
 ```sh
 mkdir -p ~/p_utils
 curl 'https://raw.githubusercontent.com/polakowski/tools_and_utils/master/git/git.sh' -o ~/p_utils/git.sh
 echo 'source ~/p_utils/git.sh' >> ~/.bashrc
+```
+
+### Updating to the latest version
+```sh
+curl 'https://raw.githubusercontent.com/polakowski/tools_and_utils/master/git/git.sh' -o ~/p_utils/git.sh
 ```
 
 ### Aliases
@@ -29,3 +37,5 @@ echo 'source ~/p_utils/git.sh' >> ~/.bashrc
 | `commit(s)`       | Commits given message |
 | `tcommit(s)`      | Commits given message, but prepends ticket number from branch name (separated by underscore). Usage: when on `XYZ-123_the_best_feature` branch, using `tcommit 'foo bar' will commit with message: "XYZ-123 foo bar"` |
 | `ggpullremote(s)` | Pulls single remote branch and sets its local remote counterpart (usage: `ggpullremote the_feature_branch`) |
+| `ggrebase(b)`          | Rebases current branch onto base branch, after pulling the base branch from remote (using ggpull command). Example usage: `ggrebase master`. |
+| `ggresolve(c)`       | Opens conflicted files with given text-editor command. Example usage: `ggresolve vim`. |
