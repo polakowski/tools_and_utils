@@ -29,6 +29,11 @@ tcommit() {
   git commit -m "$task_id $@" && echo '[Commit] Committed with task number.'
 }
 
+fcommit() {
+  task_id=$(git symbolic-ref --short HEAD | cut -d '_' -f 1 | grep -Eo '\d+')
+  git commit -m "$task_id: $@" && echo '[Commit] Committed with task number.'
+}
+
 ggpullremote() {
   if [ -z $1 ]
   then
@@ -99,4 +104,8 @@ ggresolve() {
   git diff --name-only --diff-filter=U | while read file
     do eval "$text_editor $file"
   done
+}
+
+gcoo() {
+  git checkout $(git branch | awk '/^[^\*]/ { print $1 }' | fzf)
 }
