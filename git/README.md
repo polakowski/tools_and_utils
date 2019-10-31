@@ -39,3 +39,4 @@ curl 'https://raw.githubusercontent.com/polakowski/tools_and_utils/master/git/gi
 | `ggpullremote(s)` | Pulls single remote branch and sets its local remote counterpart (usage: `ggpullremote the_feature_branch`) |
 | `ggrebase(b)`          | Rebases current branch onto base branch, after pulling the base branch from remote (using ggpull command). Example usage: `ggrebase master`. |
 | `ggresolve(c)`       | Opens conflicted files with given text-editor command. Example usage: `ggresolve vim`. |
+| `gcoo`       | Open interactive interface with branch fuzzy search. After selecting a branch, it's checkouted. |
