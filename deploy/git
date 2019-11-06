@@ -1,0 +1,3 @@
+#!/bin/bash
+
+eval 'cp git/git.sh ~/p_utils/git.sh' && echo 'Successfully copied git/git.sh'
