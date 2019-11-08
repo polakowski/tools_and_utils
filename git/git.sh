@@ -17,7 +17,7 @@ alias abortmerge='git merge --abort'
 # management
 alias ggpushforce='git push origin $(current_branch) --force-with-lease'
 alias ggpullrebase='git pull --rebase --autostash origin $(current_branch)'
-alias amendcommit='git commit --amend --no-edit'
+alias amendcommit='git commit --amend --no-verify --no-edit'
 alias fetch='echo "Fetching branches..."; git fetch --quiet && echo "Done!"'
 
 commit() {
@@ -123,7 +123,7 @@ COLOR_YELLOW='3'
 COLOR_BLUE='4'
 
 _raw_commit() {
-  _check_len "$@" 50 && git commit --quiet -m "$@" && _commit_echo "$@"
+  _check_len "$@" 50 && git commit --quiet --no-verify -m "$@" && _commit_echo "$@"
 }
 
 _check_len() {
