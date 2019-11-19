@@ -33,7 +33,7 @@ tcommit() {
 
 fcommit() {
   task_id=$(git symbolic-ref --short HEAD | cut -d '_' -f 1 | grep -Eo '\d+')
-  msg="$task_id $@"
+  msg="$task_id: $@"
 
   _raw_commit "$msg"
 }
