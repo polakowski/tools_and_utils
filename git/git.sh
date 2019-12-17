@@ -123,7 +123,7 @@ COLOR_YELLOW='3'
 COLOR_BLUE='4'
 
 _raw_commit() {
-  _check_len "$@" 50 && git commit --quiet --no-verify -m "$@" && _commit_echo "$@"
+  _check_len "$@" 80 && git commit --quiet --no-verify -m "$@" && _commit_echo "$@"
 }
 
 _check_len() {
