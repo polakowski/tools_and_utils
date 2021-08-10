@@ -92,7 +92,7 @@ if [ -n "$ITERM_SESSION_ID" ]; then
   printf $printf_template_custom Pj 009688 # selection color
   printf $printf_template_custom Pk f1f1f1 # selected text color
   printf $printf_template_custom Pl 009688 # cursor
-  printf $printf_template_custom Pm 009688 # cursor text
+  printf $printf_template_custom Pm 212121 # cursor text
 else
   printf $printf_template_var 10 $color_foreground
   if [ "$BASE16_SHELL_SET_BACKGROUND" != false ]; then
