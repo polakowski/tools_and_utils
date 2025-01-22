@@ -18,6 +18,7 @@ alias abortmerge='git merge --abort'
 alias ggpushforce='git push origin $(current_branch) --force-with-lease'
 alias ggpullrebase='git pull --rebase --autostash origin $(current_branch)'
 alias amendcommit='git commit --amend --no-verify --no-edit'
+alias uncommit='git reset --soft HEAD^'
 alias fetch='echo "Fetching branches..."; git fetch --quiet && echo "Done!"'
 
 commit() {
